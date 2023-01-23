@@ -17,6 +17,6 @@ urlpatterns = [
     path('laptop/', views.laptop, name='laptop'),
     path('laptop/<slug:data>', views.laptop, name='laptopdata'),
     path('login/', views.login, name='login'),
-    path('registration/', views.customerregistration, name='customerregistration'),
+    path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

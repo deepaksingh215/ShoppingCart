@@ -46,7 +46,6 @@ CATEGORY_CHOICES = (
     ('M','Mobile'),
     ('L','Laptop'),
     ('TW','Top Wear'),
-    ('BS','Bottom Wear'),
 )
 
 class Product(models.Model):
@@ -81,6 +80,6 @@ class OrderPlaced(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)    
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)  
-    quatity = models.PositiveIntegerField(default=1)   
+    quantity = models.PositiveIntegerField(default=1)   
     ordered_date = models.DateTimeField(auto_now_add=True)      
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending')

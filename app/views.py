@@ -3,6 +3,8 @@ from django.views import View
 from .models import *
 from .forms import CustomerRegistrationForm
 from django.contrib import messages
+
+from django.urls import reverse_lazy
 # def home(request):
 #  return render(request, 'app/home.html')
 class ProductView(View):
@@ -74,3 +76,4 @@ class CustomerRegistrationView(View):
 
 def checkout(request):
  return render(request, 'app/checkout.html')
+

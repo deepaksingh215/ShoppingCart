@@ -22,15 +22,12 @@ urlpatterns = [
 
     path('orders/', views.orders, name='orders'),
 
-    path('passwordchange/', auth_views.PasswordChangeView.as_view(
-        template_name='app/passwordchange.html',
-     form_class = MyPasswordChangeForm, 
-     success_url='/passwordchangedone/'
-     ),
-     name='passwordchange'),
+    path('passwordchange/', auth_views.PasswordChangeView.
+    as_view(template_name='app/passwordchange.html',
+        form_class=MyPasswordChangeForm, success_url= "/passwordchangedone/") ,name='passwordchange'),
     
-    path('passwordchangedone/', auth_views.PasswordChangeView.
-    as_view(template_name='app/passwordchangedone.html'), name='passwordchangedone'),
+    path('passwordchangedone/',auth_views.PasswordChangeView.as_view(
+        template_name='app/passwordchangedone.html') , name='passwordchangedone'),
 
     path('account/login/', auth_views.LoginView.as_view
         (template_name= 'app/login.html', authentication_form=LoginForm),

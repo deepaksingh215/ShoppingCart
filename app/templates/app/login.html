@@ -15,7 +15,7 @@
             {{fm.errors|striptags}}</small>
       </div>
       {% endfor %}
-      <small><a href="">Forget Passwords</a></small> <br>
+      <small><a href="{% url 'password_reset'%}">Forget Passwords</a></small> <br>
       <input type="submit" value="Login" class="btn btn-primary mt-4">
       <br>
       <div class="text-center text-primary fw-bold">

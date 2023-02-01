@@ -37,9 +37,6 @@ def address(request):
 def orders(request):
  return render(request, 'app/orders.html')
 
-def change_password(request):
- return render(request, 'app/changepassword.html')
-
 def mobile(request, data=None):
     if data == None:
         mobiles = Product.objects.filter(category='M')
@@ -70,7 +67,7 @@ class CustomerRegistrationView(View):
     def post(self, request):
         form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
-            messages.success(request, 'Registration Successful')
+            messages.success(request, 'Login Successful')
             form.save()
         return render(request, 'app/customerregistration.html', {'form': form})
 

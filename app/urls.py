@@ -16,11 +16,12 @@ urlpatterns = [
 
     path('buy/', views.buy_now, name='buy-now'),
 
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.ProfileView.as_view(), name='profile'),
 
     path('address/', views.address, name='address'),
 
     path('orders/', views.orders, name='orders'),
+
 
     path('passwordchange/', auth_views.PasswordChangeView.
     as_view(template_name='app/passwordchange.html',
@@ -29,11 +30,13 @@ urlpatterns = [
     path('passwordchangedone/',auth_views.PasswordChangeView.as_view(
         template_name='app/passwordchangedone.html') , name='passwordchangedone'),
 
+
     path('account/login/', auth_views.LoginView.as_view
         (template_name= 'app/login.html', authentication_form=LoginForm),
          name='login'),
 
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+
 
     path('password-reset/', auth_views.PasswordResetView.
     as_view(template_name='app/password_reset.html', form_class=MyPasswordResetForm), name='password_reset'),
@@ -46,9 +49,6 @@ urlpatterns = [
 
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.
     as_view(template_name='app/password_reset_complete.html'), name='password_reset_complete'),
-
-    
-
 
 
     path('mobile/', views.mobile, name='mobile'),

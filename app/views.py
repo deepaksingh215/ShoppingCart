@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .models import *
-from .forms import CustomerRegistrationForm
+from .forms import CustomerRegistrationForm, CustmerProfileForm
 from django.contrib import messages
 
 from django.urls import reverse_lazy
@@ -29,12 +29,6 @@ def add_to_cart(request):
 
 def buy_now(request):
  return render(request, 'app/buynow.html')
-
-def profile(request):
- return render(request, 'app/profile.html')
-
-def address(request):
- return render(request, 'app/address.html')
 
 def orders(request):
  return render(request, 'app/orders.html')
@@ -77,3 +71,28 @@ class CustomerRegistrationView(View):
 def checkout(request):
  return render(request, 'app/checkout.html')
 
+
+class ProfileView(View):
+    def get(self, request):
+        form = CustmerProfileForm()
+        return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
+    
+    def post(self, request):
+        form = CustmerProfileForm(request.POST)
+        if form.is_valid():
+            usr = request.user
+            name = form.cleaned_data.get('name')
+            locality = form.cleaned_data.get('locality')
+            city = form.cleaned_data.get('city')
+            zipcode = form.cleaned_data.get('zipcode') 
+            state = form.cleaned_data.get('state')
+            
+            res = Customer(user=usr, name=name, locality=locality, city=city, zipcode=zipcode, state=state)
+            res.save()
+            messages.success(request, 'Congrutulations, you have successfully updated your profile')
+        return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
+
+
+def address(request):
+    add = Customer.objects.filter(user=request.user)
+    return render(request, 'app/address.html', {'add': add,'active': 'btn-primary'})

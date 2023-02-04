@@ -11,13 +11,31 @@
    <h2>Product Title: {{ product.title}}</h2>
    <hr> 
    <p> {{product.description}} </p> <br>
-   <h4>Rs.{{product.discount_price}} <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small></h4> <br>
+   <h4>Rs.{{product.discount_price}} 
+    <small class="fw-light text-decoration-line-through">{{product.selling_price}}
+    </small></h4> <br>
    
-   <form action="/add-to-cart" class="d-inline">
-    <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id" >
-    <button type="submit" class="btn btn-primary shadow px-5 py-2">Add to Cart</button>
-   </form>
-   <a href="{% url 'buy-now' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
+    {% if request.user.is_authenticated %}  
+        {% if item_already_in_cart %}
+            <a href="{% url 'showcart' %}" class="btn btn-warning shadow px-5 py-2 ms-4">
+            Go to Cart</a>
+        
+        {% else %}    
+            <form action="/add-to-cart" class="d-inline">
+            <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id" >
+            <button type="submit" class="btn btn-primary shadow px-5 py-2">Add to Cart</button>
+            </form>
+        {% endif %}
+   {% endif %}
+
+   {% if not request.user.is_authenticated %} 
+        <form action="/add-to-cart" class="d-inline">
+            <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id" >
+            <button type="submit" class="btn btn-primary shadow px-5 py-2">Add to Cart</button>
+        </form>
+    {% endif %}
+
+   <a href="{% url 'checkout' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
    <h5 class="mt-5">Available Offers</h5>
    <ul>
     <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>

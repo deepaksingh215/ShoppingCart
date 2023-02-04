@@ -8,7 +8,6 @@ from .forms import LoginForm , MyPasswordChangeForm, MyPasswordResetForm, MySetP
 
 urlpatterns = [
     path('', views.ProductView.as_view(), name='home'),
-
     path('product-detail/<int:pk>', views.ProductDetailView.
     as_view(), name='product-detail'),
 
@@ -62,10 +61,10 @@ urlpatterns = [
     path('mobile/<slug:data>', views.mobile, name='mobiledata'),
 
     path('laptop/', views.laptop, name='laptop'),
-
     path('laptop/<slug:data>', views.laptop, name='laptopdata'),
 
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
 
     path('checkout/', views.checkout, name='checkout'),
+    path('paymentdone/', views.payment_done, name='paymentdone'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

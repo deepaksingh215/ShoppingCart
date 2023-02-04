@@ -23,8 +23,8 @@
             class= "text-danger"> Create an Account </a> </small>
       </div>
       
-      {% if form.non_fields_errors %}
-         {% for error in form.non_fields_errors %}
+      {% if form.non_field_errors %}
+         {% for error in form.non_field_errors %}
             <p class="alert alert-danger my-3">{{error}}</p>
          {% endfor %}
          

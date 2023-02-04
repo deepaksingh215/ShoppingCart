@@ -139,11 +139,10 @@ def remove_cart(request):
         return JsonResponse(data)
 
 
-
-
-@login_required
-def buy_now(request):
- return render(request, 'app/buynow.html')
+# @login_required
+# def buy_now(request):
+    
+#     return render(request, 'app/buynow.html')
 
 @login_required
 def orders(request):
@@ -216,12 +215,19 @@ def checkout(request):
 def payment_done(request):
     user = request.user
     custid = request.GET.get('custid')
-    customer = Customer.objects.get(id=custid)
+    # customer = Customer.objects.get(id=custid)
+    try:
+        customer = Customer.objects.get(id=custid)
+    except Customer.DoesNotExist:
+        messages.error(request, 'Error: Select an address to deliver your orders' )
+        return redirect('checkout')
+    
     cart = Cart.objects.filter(user=user)
     for c in cart:
         OrderPlaced(user=user, customer=customer, 
         product=c.product, quantity=c.quantity).save()
         c.delete()
+    messages.success(request, 'Order placed successfully')
     return redirect('orders')
 
 @method_decorator(login_required, name='dispatch')

@@ -23,6 +23,20 @@
     <h4>Select Shipping Address</h4>
     <hr>
     <form action="/paymentdone">
+
+      {% if messages %}
+        <div class="container mt-3">
+        {% for message in messages %}
+          {% if message.tags == "success" %}
+            <div class="alert alert-success">{{ message }}</div>
+          {% endif %}
+          {% if message.tags == "error" %}
+            <div class="alert alert-danger">{{ message }}</div>
+          {% endif %}
+        {% endfor %}
+        </div>
+      {% endif %}
+
       {% for ad in add %}
       <div class="card">
         <div class="card-body">
